@@ -291,9 +291,6 @@ h1, h2, h3, h4, h5,
 
 /* Navbar */
 .site-navbar {
-  margin-bottom: 0px;
-  z-index: 1999;
-  position: absolute;
   width: 100%;
   background: #fff; }
   .site-navbar .site-logo {
@@ -303,7 +300,7 @@ h1, h2, h3, h4, h5,
   .site-navbar .site-navigation.border-bottom {
     border-bottom: 1px solid #f3f3f4 !important; }
   .site-navbar .site-navigation .site-menu {
-    margin-bottom: 0; }
+    margin-bottom: 100; }
     .site-navbar .site-navigation .site-menu .active {
       color: #4285f4;
       display: inline-block;
@@ -605,7 +602,7 @@ h1, h2, h3, h4, h5,
     width: 100%; }
   .site-blocks-cover, .site-blocks-cover > .container > .row {
     min-height: 600px;
-    height: calc(100vh); }
+    height: 84vh; }
   .site-blocks-cover.inner-page-cover, .site-blocks-cover.inner-page-cover > .container > .row {
     min-height: 400px;
     height: calc(20vh); }
@@ -641,14 +638,13 @@ h1, h2, h3, h4, h5,
     max-width: 100%; }
   @media (max-width: 991.98px) {
     .img-absolute {
-      margin-top: 100px;
       position: relative;
       top: auto;
       width:100%;
       -webkit-transform: translateY(0%) translateX(0%);
       -ms-transform: translateY(0%) translateX(0%);
       transform: translateY(0%) translateX(0%);
-      margin-bottom: 30px; } }
+      } }
 
 .site-block-subscribe .btn {
   padding-left: 20px;

@@ -18,11 +18,11 @@
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	<header class="site-navbar py-4 site-navbar-target" role="banner">
+	<header class="site-navbar site-navbar-target" role="banner">
 	      <nav class="site-navigation navbar navbar-expand-md navbar-light">
 	        <div class="container">
 	          <div class="col-7 col-md-3 col-xl-4  d-block">
-						<h1 class="mb-0 site-logo"><a href="index.html" class="text-black h2 mb-0">Krush<span class="text-primary">.</span> </a></h1>
+						<h1 class="mb-0 site-logo"><a href="{% url 'landing-home' %}" class="text-black h2 mb-0">Krush<span class="text-primary">.</span> </a></h1>
 			   </div>
 	          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
 	          <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,7 @@
 	            <!-- Navbar Right Side -->
 	            <div class="site-menu navbar-nav">
 	            	<li><a class="nav-link" href="#">Home</a></li>
-	            	<li><a class="nav-link" href="#">Features</a></li>
+	            	<li><a class="nav-link" href="/crush/create">Create Crush</a></li>
 	            	<li class="has-children">
 	            		<a href="#">About Us  <i class="fas fa-angle-down"></i></a>
 	            		<ul class="dropdown">
@@ -41,8 +41,8 @@
 	            			<li><a href="#">Menu Three</a></li>
 	            		</ul>
 	            	</li>		     
-				     <li><a class="nav-item nav-link" href="#">Profile</a></li>
-				     <li><a class="nav-item nav-link" href="#">Logout</a></li>
+				     <li><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
+				     <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
 	            </div>
 	          </div>
 	        </div>
