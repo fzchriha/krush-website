@@ -30,20 +30,36 @@
 	          <div class="collapse navbar-collapse" id="navbarToggle">
 	            <div class="navbar-nav mr-auto"></div>
 	            <!-- Navbar Right Side -->
-	            <div class="site-menu navbar-nav">
-	            	<li><a class="nav-link" href="#">Home</a></li>
-	            	<li><a class="nav-link" href="/crush/create">Create Crush</a></li>
-	            	<li class="has-children">
-	            		<a href="#">About Us  <i class="fas fa-angle-down"></i></a>
-	            		<ul class="dropdown">
-	            			<li><a href="#">Menu One</a></li>
-	            			<li><a href="#">Menu Two</a></li>
-	            			<li><a href="#">Menu Three</a></li>
-	            		</ul>
-	            	</li>		     
-				     <li><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
-				     <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
-	            </div>
+	            {% if user.is_authenticated %}
+		            <div class="site-menu navbar-nav">
+		            	<li class="has-children">
+		            		<a href="/crush">Crushs <i class="fas fa-angle-down"></i></a>
+		            		<ul class="dropdown">
+		            			<li><a href="#">Create Crush</a></li>
+		            			<li><a href="#">Update Crush</a></li>
+		            			<li><a href="#">Delete Crush</a></li>
+		            		</ul>
+		            	</li>
+		            	<li><a class="nav-link" href="/crush">Crushs</a></li>
+		            	<li><a class="nav-link" href="/crush/create">Create Crush</a></li>   
+					    <li><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
+					    <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
+		            </div>
+		        {% else %}
+		        	<div class="site-menu navbar-nav">
+		            	<li class="has-children">
+		            		<a href="#">About Us  <i class="fas fa-angle-down"></i></a>
+		            		<ul class="dropdown">
+		            			<li><a href="#">Team</a></li>
+		            			<li><a href="#">Features</a></li>
+		            			<li><a href="#">Sponsors/a></li>
+		            		</ul>
+		            	</li>		     
+					     <li><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
+					     <li><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
+		            </div>
+		        {% endif %}
+
 	          </div>
 	        </div>
 	      </nav>

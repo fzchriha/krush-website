@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
-from posts.views import home_view, CreateCrush, detail_view, tagged
+from posts.views import home_view, CreateCrush, tagged, PostUpdateView, PostDeleteView, PostDetailView
 from landing.views import landing_home
 
 urlpatterns = [
@@ -51,7 +51,9 @@ urlpatterns = [
          name='password_reset_complete'),
     path('crush/', home_view, name='crush'),
     path('crush/create/', CreateCrush, name="create-crush"),
-    path('post/<slug:slug>/', detail_view, name="detail"),
+    path('crush/<int:pk>/', PostDetailView.as_view(), name="post-detail"),
+    path('crush/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    # path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('tag/<slug:slug>/', tagged, name="tagged"),
 ]
 
