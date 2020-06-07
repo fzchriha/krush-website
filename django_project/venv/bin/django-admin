@@ -1,4 +1,4 @@
-#!/Users/fatimazahra.chriha/Desktop/12-Password-Reset/django_project/venv/bin/python
+#!/Users/fatimazahra.chriha/Desktop/krush-website/django_project/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

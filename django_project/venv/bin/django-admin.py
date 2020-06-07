@@ -1,4 +1,4 @@
-#!/Users/fatimazahra.chriha/Desktop/12-Password-Reset/django_project/venv/bin/python
+#!/Users/fatimazahra.chriha/Desktop/krush-website/django_project/venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
