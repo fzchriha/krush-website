@@ -1,3 +1,8 @@
+export EMAIL_USER="fatimzahra.chriha@gmail.com"
+export EMAIL_PASS="bjjuqrldfnujrpbq"
+export AWS_ACCESS_KEY_ID="AKIAY6J7H4X3JYYBZUNG"
+export AWS_SECRET_ACCESS_KEY="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"
+export AWS_STORAGE_BUCKET_NAME="krush-files"
 # This file must be used with "source bin/activate" *from bash*
 # you cannot run it directly
 
@@ -46,7 +51,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='/Users/fatimazahra.chriha/Desktop/12-Password-Reset/django_project/venv'
+VIRTUAL_ENV='/Users/fatimazahra.chriha/Desktop/krush-website/django_project/venv'
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
