@@ -1,0 +1,25 @@
+
+{% extends "landing/base_login.html" %}
+{% load static %}
+{% block content %}
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form">
+                    <h1 class="mb-0 site-logo"><a href="{% url 'landing-home' %}" class="text-black h2 mb-0">Krush<span class="text-primary">.</span> </a></h1>
+                    
+                    <div class="border-top pt-3">
+                    	<h2>You have been logged out</h2>
+                        <small class="text-muted">
+                            <a href="{% url 'login' %}">Log In Again</a>
+                        </small>
+                    </div>
+                   
+                </form>
+
+                <div class="login100-more" style="background-image: url('{% static 'media/mission.png' %}');">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

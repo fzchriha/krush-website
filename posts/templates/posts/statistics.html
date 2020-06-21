@@ -1,0 +1,85 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    <div class="top_navbar">
+        <div class="hamburger">
+        <div class="hamburger__inner">
+        <i class="fas fa-bars"></i>
+        </div>
+        </div>
+        <ul class="menu">
+            <li><a href="{% url 'crush' %}" >Crushes</a></li>
+            <li><a href="{% url 'statistics' %}" class="active">Statistics</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <ul class="right_bar">
+            <li><a href="{% url 'crush' %}"><i class="fas fa-heart"></i></a></li>
+                <li><a href="{% url 'create-crush' %}"><i class="fas fa-edit"></i></a></li>
+                <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+        </ul>
+    </div>
+    <div class="container">
+      <div class="row mb-1 posts">
+        <div class="col-md-8">
+          <canvas id="myChart" width="400px" height="400px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+<script type="text/javascript">
+  {% block jquery %}
+  var crush_traits = {{ traits|safe }};
+  var traits = [];
+  var repetition = [];
+  for (var key in crush_traits) {
+    if (crush_traits.hasOwnProperty(key)) {
+        traits.push(key);
+        repetition.push(crush_traits[key]);
+    }
+}
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: traits,
+          datasets: [{
+              label: '# of Votes',
+              data: repetition,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+
+  {% endblock %}  
+</script>
+
+{% endblock content %}        
+

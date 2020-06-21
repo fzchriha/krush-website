@@ -1,0 +1,14 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+	<div class="container">
+		<h2>{{post.name}}</h2>
+		{% for tag in post.tags.all %}
+		<a href="#" class="badge badge-info" >{{ tag }}</a>
+		{% endfor %}
+		<p>{{post.nickname}}</p>
+		<p>{{post.content}}</p>
+		<p>{{post.published}}</p>
+		<a class="btn btn-primary mr-2 mb-2" href="/crush/{{post.id}}/update">Update</a>
+	</div>
+{% endblock content %}        
