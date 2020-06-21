@@ -1,0 +1,56 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form" method="POST" action="{% url 'account_login' %}">
+                  <h1 class="mb-0 site-logo"><a href="{% url 'landing-home' %}" class="text-black h2 mb-0">Krush<span class="text-primary">.</span> </a></h1>
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Sign up</legend>
+                        {% get_providers as socialaccount_providers %}
+
+                        {% if socialaccount_providers %}
+                        <div class="socialaccount_ballot">
+                          <ul class="socialaccount_providers">
+                            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                          </ul>
+                          {% include "socialaccount/snippets/login_extra.html" %}
+                          <div class="login-or">{% trans 'or' %}</div>
+                        </div>
+                        {% endif %}
+                        {{ form|crispy}}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                    </fieldset>
+                    <div class="form-group">
+                          <button class="btn btn-primary mr-2 mb-2" type="submit">Sign up</button>
+                          <small class="text-muted ml-2">
+                              <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+                          </small>
+                      </div>
+                    
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+                        </small>
+                    </div>
+                  
+                </form>
+
+                <div class="login100-more" style="background-image: url('{% static 'media/mission.png' %}');">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
