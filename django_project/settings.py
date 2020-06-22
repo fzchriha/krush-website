@@ -45,10 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.messages',
     'django.contrib.sites',
-    'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth',
 
 ]
 SITE_ID = 1
