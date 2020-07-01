@@ -1,0 +1,48 @@
+{% extends "posts/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="top_navbar">
+        <div class="hamburger">
+        <div class="hamburger__inner">
+        <i class="fas fa-bars"></i>
+        </div>
+        </div>
+        <ul class="menu">
+            
+        </ul>
+        <ul class="right_bar">
+            <li><i class="fas fa-search"></i></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+        </ul>
+    </div>
+    
+
+    <div class="container">
+        <div class="container">
+          <div class="top">
+            <h2>Friend's List</h2>
+          </div>
+          <div class="row">
+            {% for stranger in users %}
+            <div>
+                <div class="col-sm-2">
+                    <img class="rounded-circle" src="{{ stranger.profile.image.url }}" alt="profile_img" width="60px">
+                </div>
+                <div class="col-sm-8">
+                  <h4><a href="{% url 'view_profile_with_pk' operation=add pk=stranger.pk %}">{{stranger.username}}</a></h4>
+                  <p><a href="#">4 mutual friends</a></p>
+                </div>
+                <a href="{% url 'update_friend' pk=stranger.pk %}">Request Friend</a>
+                  
+                
+              </div>
+              <div class="clearfix"></div>
+              <hr />
+              {% endfor %}
+              
+          </div>
+        </div>
+        
+ 
+   
+{% endblock content %}
