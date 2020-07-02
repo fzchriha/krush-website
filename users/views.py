@@ -53,7 +53,8 @@ def view_profile(request, pk=None):
 @login_required
 def friends(request):
     users = User.objects.exclude(id=request.user.id)
-    friends = Friend.objects.get(current_user=request.user)
+    friend = Friend.objects.get(from_user=request.user)
+    friends = friend.to_user.all()
     context = {
         'users': users,
         'friends': friends,
@@ -63,10 +64,17 @@ def friends(request):
 def update_friend(request, operation, pk):
     new_friend = User.objects.get(pk=pk)
     if operation == 'add':
-        Friend.make_friend(request.user, new_friend)
+        Friend.send_friend_request(request.user, new_friend)
     elif operation == 'remove':
-        Friend.lose_friend(request.user, new_friend)
+        Friend.delete_friend(request.user, new_friend)
 
-    user = User.objects.get(pk=pk)
-    args = {'user': user}
-    return render(request, 'users/view_profile.html', args)
+    users = User.objects.exclude(id=request.user.id)
+    friend = Friend.objects.get(from_user=request.user)
+    friends = friend.to_user.all()
+    bestFriend = User.objects.get(pk=pk)
+    context = {
+        'users': users,
+        'friends': friends,
+        'bestFriend': bestFriend
+    }
+    return render(request, 'users/friends.html', context)
