@@ -32,20 +32,20 @@
                 </div>
                 </div>
                     <ul class="siderbar_menu">
-                        <li><a href="{% url 'crush' %}" class="active">
+                        <li><a href="{% url 'crushes:crush' %}" class="active">
                         <div class="title"><i class="fas fa-heart"></i> Home</div>
                         </a></li>
-                        <li><a href="{% url 'profile' %}">
+                        <li><a href="{% url 'users:profile' %}">
                         <div class="title"><i class="fas fa-newspaper"></i> Profile</div>
                         </a></li>
-                        <li><a href="{% url 'friends' %}">
+                        <li><a href="{% url 'users:friends' %}">
                         <div class="title"><i class="fas fa-user-friends"></i> Friends</div>
                         </a></li>
                         <li><a href="#">
                         <div class="title"><i class="fas fa-cog"></i> Settings</div>
                         </a></li>
                     </ul>
-                    <div><a href="{% url 'create-crush' %}" class="btn">Create Krush</a></div>
+                    <div><a href="{% url 'crushes:create-crush' %}" class="btn">Create Krush</a></div>
 
             </div>
         </div>

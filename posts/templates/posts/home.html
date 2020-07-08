@@ -32,20 +32,20 @@
                 </div>
                 </div>
                     <ul class="siderbar_menu">
-                        <li><a href="{% url 'crush' %}" class="active">
+                        <li><a href="{% url 'crushes:crush' %}" class="active">
                         <div class="title"><i class="fas fa-heart"></i> Home</div>
                         </a></li>
-                        <li><a href="{% url 'profile' %}">
+                        <li><a href="{% url 'users:profile' %}">
                         <div class="title"><i class="fas fa-newspaper"></i> Profile</div>
                         </a></li>
-                        <li><a href="{% url 'friends' %}">
+                        <li><a href="{% url 'users:friends' %}">
                         <div class="title"><i class="fas fa-user-friends"></i> Friends</div>
                         </a></li>
                         <li><a href="#">
                         <div class="title"><i class="fas fa-cog"></i> Settings</div>
                         </a></li>
                     </ul>
-                    <div><a href="{% url 'create-crush' %}" class="btn">Create Krush</a></div>
+                    <div><a href="{% url 'crushes:create-crush' %}" class="btn">Create Krush</a></div>
 
             </div>
         </div>
@@ -57,13 +57,13 @@
               </div>
               </div>
               <ul class="menu">
-                  <li><a href="{% url 'crush' %}" class="active">Crushes</a></li>
-                  <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                  <li><a href="{% url 'crushes:crush' %}" class="active">Crushes</a></li>
+                  <li><a href="{% url 'crushes:statistics' %}">Statistics</a></li>
                   <li><a href="#">About</a></li>
               </ul>
               <ul class="right_bar">
-                <li><a href="{% url 'create-crush' %}"><i class="fas fa-edit"></i></a></li>
-                <li><a href="{% url 'statistics' %}"><i class="fas fa-chart-bar"></i></a></li>
+                <li><a href="{% url 'crushes:create-crush' %}"><i class="fas fa-edit"></i></a></li>
+                <li><a href="{% url 'crushes:statistics' %}"><i class="fas fa-chart-bar"></i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
               </ul>
           </div>
@@ -72,11 +72,11 @@
                                      <div class="item no-gutters shadow-sm">
                                          <div>
                                              <div>
-                                                 <h3 class="my-1"><a class="name" href="{% url 'post-detail' post.id %}">{{post.name}}</a></h3>
+                                                 <h3 class="my-1"><a class="name" href="{% url 'crushes:post-detail' post.id %}">{{post.name}}</a></h3>
 
                                                  <div style="display:flex">
                                                      {% for tag in post.tags.all %}
-                                                     <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge trait-info">#{{ tag }}</a>
+                                                     <a href="{% url 'crushes:tagged' tag.slug %}" class="mr-1 badge trait-info">#{{ tag }}</a>
                                                      {% endfor %}
                                                  </div>
                                                  <p class="mb-auto">{{post.nickname}}</p>

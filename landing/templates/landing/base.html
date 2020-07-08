@@ -33,13 +33,13 @@
 		            <div class="site-menu navbar-nav">
 		            	<li><a class="nav-link" href="/crush">Dashboard</a></li>
 		            	<li><a class="nav-link" href="/crush/create">Create Crush</a></li>   
-					    <li><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
+					    <li><a class="nav-item nav-link" href="{% url 'users:profile' %}">Profile</a></li>
 					    <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
 		            </div>
 		        {% else %}
 		        	<div class="site-menu navbar-nav">
 		        		<li><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>		     
-					    <li><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
+					    <li><a class="nav-item nav-link" href="/signup">Register</a></li>
 					     
 		            </div>
 		        {% endif %}

@@ -15,7 +15,7 @@ from django.views.generic import (
 )
 
 @login_required
-def home_view(request):
+def crush(request):
     posts = Post.objects.filter(author=request.user)
     common_tags = Post.tags.most_common()[:4]
     form = PostForm(request.POST)

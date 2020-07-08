@@ -1,5 +1,21 @@
 from django.urls import path
-from .views import home_view, CreateCrush, detail_view, tagged
-from django.conf.urls import url
+from .views import (
+	crush,
+	tagged,
+	statistics,
+	CreateCrush, 
+	PostUpdateView, 
+	PostDeleteView, 
+	PostDetailView
+	)
 
-url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.change_friends, name='change_friends')
+urlpatterns = [
+	path('crush/', crush, name='crush'),
+	path('crush/create/', CreateCrush, name="create-crush"),
+	path('crush/<int:pk>/', PostDetailView.as_view(), name="post-detail"),
+	path('crush/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+	# path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+	path('tag/<slug:slug>/', tagged, name="tagged"),
+	path('crush/statistics', statistics, name='statistics'),
+
+]
