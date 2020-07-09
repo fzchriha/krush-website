@@ -1,44 +1,33 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
-from PIL import Image
+from django.db.models.signals import post_save
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    friends = models.ManyToManyField("Profile", blank=True)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return str(self.user.username)
 
-    # def save(self, *args, **kwargs):
-    #     super(Profile, self).save(*args, **kwargs)
+    
 
-    #     img = Image.open(self.image.path)
 
-    #     if img.height > 300 or img.width > 300:
-    #         output_size = (300,300)
-    #         img.thumbnail(output_size)
-    #         img.save(self.image.path)
-class Friend(models.Model):
-    to_user = models.ManyToManyField(User)
-    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user', null=True)
+def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        try:
+            Profile.objects.create(user=instance)
+        except:
+            pass
 
-    @classmethod
-    def send_friend_request(cls, from_user, new_friend):
-        friend, created = cls.objects.get_or_create(
-            from_user=from_user
-        )
-        friend.to_user.add(new_friend)
+post_save.connect(post_save_user_model_receiver, sender=settings.AUTH_USER_MODEL)
 
-    # @classmethod
-    # def cancel_friend_request(cls, from_user, new_friend):
 
-    # @classmethod
-    # def accept_friend_request(cls, from_user, new_friend):
-        
-    @classmethod
-    def delete_friend(cls, from_user, new_friend):
-        friend, created = cls.objects.get_or_create(
-            from_user=from_user
-        )
-        friend.to_user.remove(new_friend)
+class FriendRequest(models.Model):
+    to_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='to_user', on_delete=models.CASCADE,)
+    from_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='from_user', on_delete=models.CASCADE,)
+    timestamp = models.DateTimeField(auto_now_add=True) # set when created 
+
+    def __str__(self):
+        return "From {}, to {}".format(self.from_user.username, self.to_user.username)

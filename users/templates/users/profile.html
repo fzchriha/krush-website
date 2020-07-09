@@ -8,7 +8,7 @@
         </div>
         </div>
         <ul class="menu">
-            <!-- <li><a href="{% url 'crush' %}" class="active">Profile info</a></li>
+            <!-- <li><a href="{% url 'crushes:crush' %}" class="active">Profile info</a></li>
             <li><a href="#">About</a></li> -->
         </ul>
         <ul class="right_bar">
@@ -17,20 +17,42 @@
         </ul>
     </div>
     <div class="container">
-        <div class="row mb-1 posts">
-          <div class="col-md-8">
+        <div class="container text-center">
+            <span><a href="/crush">Home</a></span>
             
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Profile Info</legend>
-                    {{ u_form|crispy }}
-                    {{ p_form|crispy }}
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Update</button>
-                </div>
-            </form>
-          </div>
-        </div>
+            {% if request.user == u %}
+
+                <h1>Friends</h1>
+                
+                {% for friend in friends_list %}
+                    <a href="{{ friend.user.profile.get_absolute_url }}">{{ friend.user.username }}</a>
+                {% endfor %}
+                <hr>
+                <h2>Sent Friend requests</h2>
+                <ul>
+                {% for s_request in sent_friend_requests %}
+                    <li>{{ s_request.to_user.username }}</li>
+                {% endfor %}
+                </ul>
+                <hr>
+                <h2>Received Friend requests</h2>
+                
+                {% for r_request in rec_friend_requests %}
+                    <p><a href="{{ r_request.from_user.profile.get_absolute_url }}">{{ r_request.from_user.username }}</a></p>
+                    <small><a class='btn btn-primary' href="/friends/friend-request/accept/{{ r_request.from_user.id }}">Accept</a></small>
+                    <small><a class='btn btn-warning' href="/friends/friend-request/delete/{{ r_request.from_user.id }}">Ignore</a></small>
+                {% endfor %}
+                
+
+            {% else %}
+
+                {% if button_status == 'not_friend' %}
+                    <small><a class='btn btn-primary' href="/friendsfriends/friend-request/send/{{ u.id }}">Add Friend</a></small>
+                {% elif button_status == 'friend_request_sent' %}
+                    <small><a class="btn btn-warning" href="/friends/friend-request/cancel/{{ u.id }}">Cancel Request</a></small>
+                {% endif %}
+
+            {% endif %}
+
+            </div>
 {% endblock content %}

@@ -1,0 +1,36 @@
+{% extends "posts/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="top_navbar">
+        <div class="hamburger">
+        <div class="hamburger__inner">
+        <i class="fas fa-bars"></i>
+        </div>
+        </div>
+        <ul class="menu">
+            <!-- <li><a href="{% url 'crush' %}" class="active">Profile info</a></li>
+            <li><a href="#">About</a></li> -->
+        </ul>
+        <ul class="right_bar">
+            <li><i class="fas fa-search"></i></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row mb-1 posts">
+          <div class="col-md-8">
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Profile Info</legend>
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Update</button>
+                </div>
+            </form>
+          </div>
+        </div>
+{% endblock content %}

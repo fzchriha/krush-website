@@ -1,14 +1,20 @@
-from django.urls import path
+from django.urls import path, re_path
 from .views import (
-	profile,
-	view_profile,
-	update_friend,
-	friends,
+	users_list, 
+	profile_view, 
+	send_friend_request, 
+	cancel_friend_request,
+	accept_friend_request,
+	delete_friend_request,
+	profile
 	)
 
 urlpatterns = [
-    path('profile/', profile, name='profile'),
-    path('profile/(?P<pk>\d+)/', view_profile, name='view_profile'),
-    path('connect/(?P<operation>.+)/(?P<pk>\d+)/', update_friend, name='update_friend'),
-    path('friends/', friends, name='friends'),
+	path('friends/', users_list, name='users_list'),
+	path('(?P<pk>\d+)/', profile_view, name='profile_view'),
+    re_path(r'^profile$', profile, name='profile'),
+    re_path(r'friends/friend-request/send/(?P<id>[\w-]+)/$', send_friend_request),
+    re_path(r'^friends/friend-request/cancel/(?P<id>[\w-]+)/$', cancel_friend_request),
+    re_path(r'^friends/friend-request/accept/(?P<id>[\w-]+)/$', accept_friend_request),
+    re_path(r'^friends/friend-request/delete/(?P<id>[\w-]+)/$', delete_friend_request),
 ]

@@ -8,13 +8,13 @@
             </div>
             </div>
             <ul class="menu">
-                <li><a href="{% url 'crush' %}" class="active">Crushes</a></li>
-                <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                <li><a href="{% url 'crushes:crush' %}" class="active">Crushes</a></li>
+                <li><a href="{% url 'crushes:statistics' %}">Statistics</a></li>
                 <li><a href="#">About</a></li>
             </ul>
             <ul class="right_bar">
-                <li><a href="{% url 'crush' %}"><i class="fas fa-heart"></i></a></li>
-                <li><a href="{% url 'statistics' %}"><i class="fas fa-chart-bar"></i></a></li>
+                <li><a href="{% url 'crushes:crush' %}"><i class="fas fa-heart"></i></a></li>
+                <li><a href="{% url 'crushes:statistics' %}"><i class="fas fa-chart-bar"></i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
             </ul>
         </div>

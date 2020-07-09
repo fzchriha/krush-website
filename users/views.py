@@ -1,13 +1,14 @@
-from django.views.generic import TemplateView
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.contrib.auth.models import User
-from .models import Friend
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+
+from .models import Profile, FriendRequest
 
 @login_required
-def profile(request):
+def settings(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -28,41 +29,108 @@ def profile(request):
         'p_form': p_form
     }
 
-    return render(request, 'users/profile.html', context)
+    return render(request, 'users/settings.html', context)
 
-def view_profile(request, pk=None):
-    if pk:
-        user = User.objects.get(pk=pk)
-    else:
-        user = request.user
-    args = {'user': user}
-    return render(request, 'users/view_profile.html', args)
 
-@login_required
-def friends(request):
-    users = User.objects.exclude(id=request.user.id)
-    friend = get_object_or_404(Friend, from_user=request.user)
-    friends = friend.to_user.all()
+User = get_user_model()
+
+def users_list(request):
+    users = Profile.objects.exclude(user=request.user)
     context = {
-        'users': users,
-        'friends': friends,
+        'users': users
     }
-    return render(request, 'users/friends.html', context)
+    return render(request, "users/friends.html", context)
 
-def update_friend(request, operation, pk):
-    new_friend = User.objects.get(pk=pk)
-    if operation == 'add':
-        Friend.send_friend_request(request.user, new_friend)
-    elif operation == 'remove':
-        Friend.delete_friend(request.user, new_friend)
+def send_friend_request(request, id):
+        user = get_object_or_404(User, id=id)
+        frequest, created = FriendRequest.objects.get_or_create(
+            from_user=request.user,
+            to_user=user)
+        return HttpResponseRedirect('/friends')
 
-    users = User.objects.exclude(id=request.user.id)
-    friend = Friend.objects.get(from_user=request.user)
-    friends = friend.to_user.all()
-    bestFriend = User.objects.get(pk=pk)
+def cancel_friend_request(request, id):
+        user = get_object_or_404(User, id=id)
+        frequest = FriendRequest.objects.filter(
+            from_user=request.user,
+            to_user=user).first()
+        frequest.delete()
+        return HttpResponseRedirect('/friends')
+
+def accept_friend_request(request, id):
+    from_user = get_object_or_404(User, id=id)
+    frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
+    user1 = frequest.to_user
+    user2 = from_user
+    user1.profile.friends.add(user2.profile)
+    user2.profile.friends.add(user1.profile)
+    frequest.delete()
+    return HttpResponseRedirect('/profile')
+
+def delete_friend_request(request, id):
+    from_user = get_object_or_404(User, id=id)
+    frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
+    frequest.delete()
+    return HttpResponseRedirect('/{}'.format(request.user.profile.slug))
+
+def profile(request):
+    p = Profile.objects.filter(user=request.user).first()
+    u = p.user
+    sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
+    rec_friend_requests = FriendRequest.objects.filter(to_user=request.user)
+
+    friends = p.friends.all()
+
+    # is this user our friend
+    button_status = 'none'
+    if p not in request.user.profile.friends.all():
+        button_status = 'not_friend'
+
+        # if we have sent him a friend request
+        if len(FriendRequest.objects.filter(
+            from_user=request.user).filter(to_user=p.user)) == 1:
+                button_status = 'friend_request_sent'
+
     context = {
-        'users': users,
-        'friends': friends,
-        'bestFriend': bestFriend
+        'u': u,
+        'button_status': button_status,
+        'friends_list': friends,
+        'sent_friend_requests': sent_friend_requests,
+        'rec_friend_requests': rec_friend_requests
     }
-    return render(request, 'users/friends.html', context)
+    return render(request, "users/profile.html", context)
+def profile_view(request, pk=None):
+    u = User.objects.get(pk=pk)
+    p = u.profile
+    
+    sent_friend_requests = FriendRequest.objects.filter(from_user=p.user)
+    rec_friend_requests = FriendRequest.objects.filter(to_user=p.user)
+
+    friends = p.friends.all()
+
+    # is this user our friend
+    button_status = 'none'
+    if p not in request.user.profile.friends.all():
+        button_status = 'not_friend'
+
+        # if we have sent him a friend request
+        if len(FriendRequest.objects.filter(
+            from_user=request.user).filter(to_user=p.user)) == 1:
+                button_status = 'friend_request_sent'
+    print(u)
+    print(request.user)
+    print(u == request.user)
+    print(friends)
+    print(sent_friend_requests)
+    context = {
+        'u': u,
+        'button_status': button_status,
+        'friends_list': friends,
+        'sent_friend_requests': sent_friend_requests,
+        'rec_friend_requests': rec_friend_requests
+    }
+
+    return render(request, "users/profile.html", context)
+
+
+
+
