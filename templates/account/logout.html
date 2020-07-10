@@ -1,21 +1,33 @@
-{% extends "account/base.html" %}
-
+{% extends "landing/base_login.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
+<div class="limiter">
+	<div class="container-login100">
+		<div class="wrap-login100">
+			<form class="login100-form" method="post" action="{% url 'account_logout' %}">
+				<h1 class="mb-0 site-logo"><a href="{% url 'landing-home' %}" class="text-black h2 mb-0">Krush<span class="text-primary">.</span> </a></h1>
+				<div class="border-top pt-3">
+					<h1>{% trans "Sign Out" %}</h1>
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
-
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
-
-
+					<p>{% trans 'Are you sure you want to sign out?' %}</p>
+				</div>
+				  {% csrf_token %}
+				  {% if redirect_field_value %}
+				  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+				  {% endif %}
+				  <button type="submit">{% trans 'Sign Out' %}</button>
+			</form>
+			<div class="login100-more" style="background-image: url('{% static 'media/mission.png' %}');">
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
+
+
+
+
