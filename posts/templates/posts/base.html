@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/tagsinput.css'%}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/feed.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/notifications.css' %}">
 
 </head>
 <body translate="no">
@@ -65,16 +66,25 @@
   <script type="text/javascript" src="{% static 'js/tagsinput.js'%}"></script>
   <script src="{% static 'js/main.js' %}" type="232c8fa1d69ab1b850676250-text/javascript"></script>
   <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="232c8fa1d69ab1b850676250-|49" defer=""></script>
-<script id="rendered-js">
-$(".hamburger .fas").click(function () {
-  $(".wrapper").addClass("active");
-});
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script>
+    $(".hamburger .fas").click(function () {
+      $(".wrapper").addClass("active");
+    });
 
-$(".wrapper .sidebar .close").click(function () {
-  $(".wrapper").removeClass("active");
-});
-//# sourceURL=pen.js
-    </script>
+    $(".notifications .icon_wrap").click(function () {
+      $(this).parent().toggleClass("active");
+    });
+
+    $(".show_all .link").click(function () {
+      $(".notifications").removeClass("active");
+      $(".popup").show();
+    });
+
+    $(".close, .shadow").click(function () {
+      $(".popup").hide();
+    });
+  </script>
 </body>
 </html>
       
