@@ -1,21 +1,7 @@
 {% extends "posts/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="top_navbar">
-        <div class="hamburger">
-        <div class="hamburger__inner">
-        <i class="fas fa-bars"></i>
-        </div>
-        </div>
-        <ul class="menu">
-            <!-- <li><a href="{% url 'crushes:crush' %}" class="active">Profile info</a></li>
-            <li><a href="#">About</a></li> -->
-        </ul>
-        <ul class="right_bar">
-            <li><i class="fas fa-search"></i></li>
-            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
-        </ul>
-    </div>
+    
     <div class="container">
         <div class="container text-center">
             <span><a href="/crush">Home</a></span>
@@ -55,4 +41,5 @@
             {% endif %}
 
             </div>
+    </div>
 {% endblock content %}

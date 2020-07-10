@@ -24,9 +24,14 @@ def settings(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
+    sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
+    rec_friend_requests = FriendRequest.objects.filter(to_user=request.user)
+        
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'sent_friend_requests': sent_friend_requests,
+        'rec_friend_requests': rec_friend_requests
     }
 
     return render(request, 'users/settings.html', context)
@@ -36,8 +41,12 @@ User = get_user_model()
 
 def users_list(request):
     users = Profile.objects.exclude(user=request.user)
+    sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
+    rec_friend_requests = FriendRequest.objects.filter(to_user=request.user)
     context = {
-        'users': users
+        'users': users,
+        'sent_friend_requests': sent_friend_requests,
+        'rec_friend_requests': rec_friend_requests
     }
     return render(request, "users/friends.html", context)
 
@@ -102,8 +111,8 @@ def profile_view(request, pk=None):
     u = User.objects.get(pk=pk)
     p = u.profile
     
-    sent_friend_requests = FriendRequest.objects.filter(from_user=p.user)
-    rec_friend_requests = FriendRequest.objects.filter(to_user=p.user)
+    sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
+    rec_friend_requests = FriendRequest.objects.filter(to_user=request.user)
 
     friends = p.friends.all()
 

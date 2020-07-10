@@ -51,7 +51,66 @@
             </div>
         </div>
         <div class="main_container">
-            
+            <div class="top_navbar">
+                <div class="hamburger">
+                <div class="hamburger__inner">
+                <i class="fas fa-bars"></i>
+                </div>
+                </div>
+                <ul class="menu">
+                    <li><a href="{% url 'crushes:crush' %}" class="active">Crushes</a></li>
+                    <li><a href="{% url 'crushes:statistics' %}">Statistics</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <ul class="right_bar">
+                    <div class="notifications">
+                        <div class="icon_wrap"><i class="fas fa-bell"></i></div>
+                        <div class="notification_dd">
+                            <ul class="notification_ul">
+                                {% for s_request in sent_friend_requests %}
+                                <li class="starbucks success">
+                                    <div class="notify_icon">
+                                    <span class="icon"></span>
+                                    </div>
+                                    <div class="notify_data">
+                                        <div class="title">
+                                        Sent friend requests
+                                        </div>
+                                        <div class="sub_title">
+                                            To {{ s_request.to_user.username }}
+                                        </div>
+                                    </div>
+                                    
+                                </li>
+                                {% endfor %}
+
+                                {% for r_request in rec_friend_requests %}
+                                <li class="baskin_robbins failed">
+                                    <div class="notify_icon">
+                                    <span class="icon"></span>
+                                    </div>
+                                    <div class="notify_data">
+                                        <a href="{{ r_request.from_user.profile.get_absolute_url }}">{{ r_request.from_user.username }}</a> sent you a friend request
+                                        
+                                        
+                                            <small><a class='btn btn-primary' href="/friends/friend-request/accept/{{ r_request.from_user.id }}">Accept</a></small>
+                                            <small><a class='btn btn-warning' href="/friends/friend-request/delete/{{ r_request.from_user.id }}">Ignore</a></small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                                {% endfor %}
+                                
+
+                                <li class="show_all"><p class="link">Show All Activities</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <li><a href="{% url 'crushes:create-crush' %}"><i class="fas fa-edit"></i></a></li>
+                    <li><a href="{% url 'crushes:statistics' %}"><i class="fas fa-chart-bar"></i></a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
             {% block content %}{% endblock content %}
 
 

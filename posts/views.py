@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+from users.models import Profile, FriendRequest
 from .forms import PostForm
 from collections import Counter
 from taggit.models import Tag
@@ -24,10 +25,14 @@ def crush(request):
         newpost.slug = slugify(newpost.name)
         newpost.save()
         form.save_m2m()
+    sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
+    rec_friend_requests = FriendRequest.objects.filter(to_user=request.user)
     context = {
         'posts':posts,
         'common_tags':common_tags,
         'form':form,
+        'sent_friend_requests': sent_friend_requests,
+        'rec_friend_requests': rec_friend_requests
     }
     return render(request, 'posts/home.html', context)
 
