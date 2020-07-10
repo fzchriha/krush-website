@@ -46,7 +46,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='/Users/fatimazahra.chriha/Desktop/krush-website/django_project/venv'
+VIRTUAL_ENV='/Users/fatimazahra.chriha/Desktop/Personal Projects/krush/krush_app/venv'
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

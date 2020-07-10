@@ -28,7 +28,7 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
-$VIRTUAL_ENV = r"/Users/fatimazahra.chriha/Desktop/krush-website/django_project/venv"
+$VIRTUAL_ENV = r"/Users/fatimazahra.chriha/Desktop/Personal Projects/krush/krush_app/venv"
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]

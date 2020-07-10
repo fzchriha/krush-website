@@ -1,0 +1,35 @@
+{% extends "posts/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="top_navbar">
+        <div class="hamburger">
+        <div class="hamburger__inner">
+        <i class="fas fa-bars"></i>
+        </div>
+        </div>
+        <ul class="menu">
+            <!-- <li><a href="{% url 'crush' %}" class="active">Profile info</a></li>
+            <li><a href="#">About</a></li> -->
+        </ul>
+        <ul class="right_bar">
+            <li><i class="fas fa-search"></i></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="container">
+            <h1>Profile</h1>
+            <p>Username: {{ user }}</p>
+            <p>First name: {{ user.first_name }}</p>
+            <p>Last name: {{ user.last_name }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Description: {{ user.userprofile.description }}</p>
+            <p>Phone: {{ user.userprofile.phone }}</p>
+            <p>City: {{ user.userprofile.city }}</p>
+            <p>Website: {{ user.userprofile.website }}</p>
+            {% if user.profile.image %}
+            <img src="{{ user.profile.image.url }}" width="240">
+            {% endif %}
+        </div>
+
+{% endblock content %}
