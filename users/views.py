@@ -120,8 +120,8 @@ def profile(request):
     }
     return render(request, "users/profile.html", context)
 def profile_view(request, pk=None):
-    u = User.objects.get(pk=pk)
-    p = u.profile
+    p = Profile.objects.get(pk=pk)
+    u = p.user
     
     sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
     rec_friend_requests = FriendRequest.objects.filter(to_user=request.user)
