@@ -8,7 +8,7 @@
 <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form class="login100-form" method="POST" action="{% url 'account_login' %}">
+                <form class="login100-form" id="signup_form" method="POST" action="{% url 'account_signup' %}">
                   <h1 class="mb-0 site-logo"><a href="{% url 'landing-home' %}" class="text-black h2 mb-0">Krush<span class="text-primary">.</span> </a></h1>
                     {% csrf_token %}
                     <fieldset class="form-group">
@@ -38,7 +38,7 @@
                     
                     <div class="border-top pt-3">
                         <small class="text-muted">
-                            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign in</a>
+                            Already Have An Account? <a class="ml-2" href="{% url 'account_login' %}">Sign in</a>
                         </small>
                     </div>
                   
