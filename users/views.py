@@ -137,11 +137,11 @@ def profile_view(request, pk=None):
         if len(FriendRequest.objects.filter(
             from_user=request.user).filter(to_user=p.user)) == 1:
                 button_status = 'friend_request_sent'
-    print(u)
-    print(request.user)
-    print(u == request.user)
-    print(friends)
-    print(sent_friend_requests)
+#     print(u)
+#     print(request.user)
+#     print(u == request.user)
+#     print(friends)
+#     print(sent_friend_requests)
     context = {
         'u': u,
         'button_status': button_status,
