@@ -14,7 +14,9 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-
+# This method displays the crushes in the home page
+# PS: even though friend requests are in the context it is not used yet
+# I was counting on diplaying crushes in my friends pages if we are friends (feature no added yet)
 @login_required
 def crush(request):
     posts = Post.objects.filter(author=request.user)
