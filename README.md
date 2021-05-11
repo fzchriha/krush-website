@@ -4,7 +4,7 @@ A web application to help users better understand what their ideal romantic part
 
 # Usage
 
-  Visit https://kruush.herokuapp.com/ and create an account using your email or your Google account, then create your crush's profile (it will be only visible to you), based on the tags you assign to them (or as I like to call them *traits*) you can view what attracts you the most by visiting **analytics.
+  Visit https://kruush.herokuapp.com/ and create an account using your email or your Google account, then create your crush's profile (it will be only visible to you), based on the tags you assign to them (or as I like to call them *traits*) you can view what attracts you the most by visiting **analytics**.
 
 # Demo
 
