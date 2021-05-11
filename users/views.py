@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Profile, FriendRequest
 
+# Method to register without using django-allauth library
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -19,6 +20,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
+# Method to update the profile in settings (the user must be logged in)
 @login_required
 def settings(request):
     if request.method == 'POST':
@@ -51,6 +53,7 @@ def settings(request):
 
 User = get_user_model()
 
+# This is to get the user list (when searching for friends you want to see who has an account, so you can send them a friend request)
 def users_list(request):
     users = Profile.objects.exclude(user=request.user)
     sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
@@ -93,6 +96,7 @@ def delete_friend_request(request, id):
     frequest.delete()
     return HttpResponseRedirect('/{}'.format(request.user.profile.slug))
 
+# This method helps display the profile of the user
 def profile(request):
     p = Profile.objects.filter(user=request.user).first()
     u = p.user
@@ -137,11 +141,7 @@ def profile_view(request, pk=None):
         if len(FriendRequest.objects.filter(
             from_user=request.user).filter(to_user=p.user)) == 1:
                 button_status = 'friend_request_sent'
-#     print(u)
-#     print(request.user)
-#     print(u == request.user)
-#     print(friends)
-#     print(sent_friend_requests)
+
     context = {
         'u': u,
         'button_status': button_status,
