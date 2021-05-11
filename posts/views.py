@@ -54,6 +54,7 @@ def CreateCrush(request):
     }
     return render(request, 'posts/create_crush.html', context)
 
+# Update the crush's profile
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['name', 'nickname', 'content']
@@ -69,6 +70,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+# Delete the crush's profile
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = '/crush'
@@ -95,6 +97,7 @@ def tagged(request, slug):
     }
     return render(request, 'posts/home.html', context)
 
+# Function to get the analysis of the crushes traits
 def statistics(request):
     traits = Counter()
     crushes =  Post.objects.filter(author=request.user)
