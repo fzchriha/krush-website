@@ -84,6 +84,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostDetailView(DetailView):
     model = Post
 
+# Method is used to enable clicking on a specific tag (trait) and it filters the crushes who have that trait
 @login_required
 def tagged(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
