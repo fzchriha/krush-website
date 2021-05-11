@@ -8,7 +8,8 @@ from .views import (
 	PostDeleteView, 
 	PostDetailView
 	)
-
+# We feed in the methods which has the logic, and then it goes to html pages
+# We now create a path where the html page will be displayed
 urlpatterns = [
 	path('crush/', crush, name='crush'),
 	path('crush/create/', CreateCrush, name="create-crush"),
