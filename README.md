@@ -28,4 +28,5 @@ A web application to help users better understand what their ideal romantic part
   * Clone this github repository
   
   `pip install -r requirements.txt`
+  `pip install django`
 
