@@ -21,7 +21,15 @@ A web application to help users better understand what their ideal romantic part
   (Spoiler,I made that blog, skip the story and check the article below)
   https://medium.com/@fatimazahrachriha/combine-django-taggit-and-chartjs-85de844de30c
 
-
+# Future Work:
+  * **August 4, 2021** Security issues, the current application no longer supports https, it's now http which is conflicting with the Google authentification
+  * Create a layout for Friends page
+  * Have notifications icon pop when a user gets a new notification
+  * Create a messaging system for friends
+  * Debug Forgot my password page
+  * Create a settings page
+  
+ 
 # Contribute to this project:
 
   * Fork this github repository
