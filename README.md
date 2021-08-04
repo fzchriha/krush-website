@@ -26,6 +26,7 @@ A web application to help users better understand what their ideal romantic part
   * Create a layout for Friends page
   * Have notifications icon pop when a user gets a new notification
   * Create a messaging system for friends
+  * Debug Forgot my password page
   
  
 # Contribute to this project:
