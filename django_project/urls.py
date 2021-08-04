@@ -54,6 +54,6 @@ urlpatterns = [
 
 ]
 
-
+# During development, you can access user-uploaded images using MEDIA_ROOT, but after production it checks MEDIA_URL  
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
