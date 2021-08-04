@@ -3,6 +3,8 @@
  * 
  */
 
+/* JavaScript for the tags aka crush traits*/
+
 (function ($) {
     "use strict";
   
