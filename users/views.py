@@ -21,6 +21,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 # Method to update the profile in settings (the user must be logged in)
+# Currently not being used (some bugs encountered when trying to update profile)
 @login_required
 def settings(request):
     if request.method == 'POST':
