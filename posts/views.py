@@ -101,6 +101,8 @@ def tagged(request, slug):
     return render(request, 'posts/home.html', context)
 
 # Function to get the analysis of the crushes traits
+# Checkout this article I wrote to understand more how the report is generated
+# https://medium.com/@fatimazahrachriha/combine-django-taggit-and-chartjs-85de844de30c
 def statistics(request):
     traits = Counter()
     crushes =  Post.objects.filter(author=request.user)
