@@ -7,7 +7,8 @@ from .views import (
 	cancel_friend_request,
 	accept_friend_request,
 	delete_friend_request,
-	profile
+	profile,
+	settings
 	)
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     re_path(r'^friends/friend-request/cancel/(?P<id>[\w-]+)/$', cancel_friend_request),
     re_path(r'^friends/friend-request/accept/(?P<id>[\w-]+)/$', accept_friend_request),
     re_path(r'^friends/friend-request/delete/(?P<id>[\w-]+)/$', delete_friend_request),
+    # path('settings/', settings, name='settings'),
 ]

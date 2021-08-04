@@ -123,6 +123,8 @@ def profile(request):
         'rec_friend_requests': rec_friend_requests
     }
     return render(request, "users/profile.html", context)
+
+# a function to be able to view someone else's profile
 def profile_view(request, pk=None):
     p = Profile.objects.get(pk=pk)
     u = p.user
