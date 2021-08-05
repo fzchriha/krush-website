@@ -24,6 +24,7 @@ def crush(request):
     form = PostForm(request.POST)
     if form.is_valid():
         newpost = form.save(commit=False)
+        #generate urls for the posts aka crushes
         newpost.slug = slugify(newpost.name)
         newpost.save()
         form.save_m2m()
